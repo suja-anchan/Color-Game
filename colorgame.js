@@ -19,7 +19,7 @@ var resetb= document.querySelector("#reset");
 var easyb=document.querySelector("#easy");
 var hardb=document.querySelector("#hard");
 
-
+colordisp.textContent=pickedcolor;
 easyb.addEventListener("click",function(){
 	numSqs=3
 hardb.classList.remove("selected");
@@ -61,7 +61,7 @@ resetb.addEventListener("click",function(){
 	for(var i=0;i<squares.length;i++)
 	  squares[i].style.backgroundColor=colors[i];
 	
-	h1.style.background="#232323";
+	h1.style.background="steelblue";
 });
 
 
