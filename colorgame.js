@@ -7,8 +7,8 @@
 // "rgb(255, 0, 255)",
 // ]
 
-
-var colors = generateRandomColors(6);
+var numSqs=6;
+var colors = generateRandomColors(numSqs);
 var squares=document.querySelectorAll(".square");
 var pickedcolor=pickcolor();
 var colordisp=document.querySelector("#colordisp");
@@ -19,10 +19,12 @@ var resetb= document.querySelector("#reset");
 var easyb=document.querySelector("#easy");
 var hardb=document.querySelector("#hard");
 
+
 easyb.addEventListener("click",function(){
+	numSqs=3
 hardb.classList.remove("selected");
 easyb.classList.add("selected");
-colors=generateRandomColors(3);
+colors=generateRandomColors(numSqs);
 pickedcolor=pickcolor();
 colordisp.textContent=pickedcolor;
 for(var i=0;i<squares.length;i++)
@@ -39,9 +41,10 @@ else
 });
 
 hardb.addEventListener("click",function(){
+	numSqs=6
 easyb.classList.remove("selected");
 hardb.classList.add("selected");
-colors=generateRandomColors(6);
+colors=generateRandomColors(numSqs);
 pickedcolor=pickcolor();
 colordisp.textContent=pickedcolor;
 for(var i=0;i<squares.length;i++)
@@ -52,7 +55,7 @@ for(var i=0;i<squares.length;i++)
 });
 
 resetb.addEventListener("click",function(){
-	colors=generateRandomColors(6);
+	colors=generateRandomColors(numSqs);
 	pickedcolor= pickcolor();
 	colordisp.textContent=pickedcolor;
 	for(var i=0;i<squares.length;i++)
