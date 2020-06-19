@@ -6,68 +6,47 @@
 // "rgb(0, 0, 255)",
 // "rgb(255, 0, 255)",
 // ]
-
+// var game={};
+// game.init= function(){
+	
+// }
 var numSqs=6;
-var colors = generateRandomColors(numSqs);
+var colors = [];
 var squares=document.querySelectorAll(".square");
-var pickedcolor=pickcolor();
+var pickedcolor;
 var colordisp=document.querySelector("#colordisp");
 var msgdisp=document.querySelector("#dispMsg");
 
 var h1=document.querySelector("h1");
 var resetb= document.querySelector("#reset");
-var easyb=document.querySelector("#easy");
-var hardb=document.querySelector("#hard");
+// var easyb=document.querySelector("#easy");
+// var hardb=document.querySelector("#hard");
+var modebtns=document.querySelectorAll(".mode");
 
-colordisp.textContent=pickedcolor;
-easyb.addEventListener("click",function(){
-	numSqs=3
-hardb.classList.remove("selected");
-easyb.classList.add("selected");
-colors=generateRandomColors(numSqs);
-pickedcolor=pickcolor();
-colordisp.textContent=pickedcolor;
-for(var i=0;i<squares.length;i++)
-{
-if(colors[i]){
-	squares[i].style.background=colors[i];
-}
-else
-{
-	squares[i].style.display="none";
-}
+init();
+
+function init(){
+	setupModeButtons();
+	setupSquares();
+	reset();
+
 }
 
+	function setupModeButtons(){
+			for(var i=0;i<modebtns.length;i++){
+    modebtns[i].addEventListener("click",function(){
+	modebtns[0].classList.remove("selected");
+	modebtns[1].classList.remove("selected");
+    this.classList.add("selected");
+    this.textContent === "Easy" ? numSqs=3: numSqs=6;
+     reset();
 });
-
-hardb.addEventListener("click",function(){
-	numSqs=6
-easyb.classList.remove("selected");
-hardb.classList.add("selected");
-colors=generateRandomColors(numSqs);
-pickedcolor=pickcolor();
-colordisp.textContent=pickedcolor;
-for(var i=0;i<squares.length;i++)
-{
-	squares[i].style.display="block";
 }
 
-});
+}
 
-resetb.addEventListener("click",function(){
-	colors=generateRandomColors(numSqs);
-	pickedcolor= pickcolor();
-	colordisp.textContent=pickedcolor;
-	for(var i=0;i<squares.length;i++)
-	  squares[i].style.backgroundColor=colors[i];
-	
-	h1.style.background="steelblue";
-});
-
-
-for(var i=0;i<squares.length;i++){
-	//add initial colors to squares
-	squares[i].style.backgroundColor=colors[i];
+function setupSquares(){
+	for(var i=0;i<squares.length;i++){
 
 	//add listeners to squares
 	squares[i].addEventListener("click",function(){
@@ -89,7 +68,75 @@ for(var i=0;i<squares.length;i++){
 		
 		
 	});
+
 }
+}
+	
+
+
+
+
+function reset(){
+	colors=generateRandomColors(numSqs);
+	pickedcolor= pickcolor();
+	colordisp.textContent=pickedcolor;
+	msgdisp.textContent="";
+	resetb.textContent="New Colors";
+
+	for(var i=0;i<squares.length;i++){
+		if(colors[i]){
+			squares[i].style.display="block";
+			squares[i].style.backgroundColor=colors[i];
+		}
+		else{
+			squares[i].style.display="none";
+		}
+	  
+	}
+	
+	h1.style.background="steelblue";
+}
+
+
+// easyb.addEventListener("click",function(){
+// 	numSqs=3
+// hardb.classList.remove("selected");
+// easyb.classList.add("selected");
+// colors=generateRandomColors(numSqs);
+// pickedcolor=pickcolor();
+// colordisp.textContent=pickedcolor;
+// for(var i=0;i<squares.length;i++)
+// {
+// if(colors[i]){
+// 	squares[i].style.background=colors[i];
+// }
+// else
+// {
+// 	squares[i].style.display="none";
+// }
+// }
+
+// });
+
+// hardb.addEventListener("click",function(){
+// 	numSqs=6
+// easyb.classList.remove("selected");
+// hardb.classList.add("selected");
+// colors=generateRandomColors(numSqs);
+// pickedcolor=pickcolor();
+// colordisp.textContent=pickedcolor;
+// for(var i=0;i<squares.length;i++)
+// {
+// 	squares[i].style.display="block";
+// }
+
+// });
+
+resetb.addEventListener("click",function(){
+	reset();
+});
+
+
 
 function changeclr(color){
 	for (var i=0; i<colors.length;i++){
